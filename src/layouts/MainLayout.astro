@@ -2,6 +2,7 @@
 import '../styles/global.css'
 import Spotlight from '../components/Spotlight';
 import Contact from '../components/Contact.astro';
+import ThemeToggle from '../components/ThemeToggle';
 
 interface Props {
 	title?: string;
@@ -12,7 +13,6 @@ const {
 	title = "Emrullah Yıldırım - Full-Stack Developer",
 	description = "Full-stack developer focused on building clean, scalable solutions. Experienced in React, Next.js, Node.js, and more."
 } = Astro.props;
-
 ---
 
 <html lang="en">
@@ -25,14 +25,19 @@ const {
 
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
-		<link rel="sitemap" href="/sitemap-index.xml" />
 
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet" />
+
+		<script is:inline>
+			const theme = localStorage.getItem('theme') || 'dark';
+			if (theme === 'light') document.documentElement.classList.add('light');
+		</script>
 	</head>
 
 	<body>
+		<ThemeToggle client:load />
 		<Spotlight client:load />
 		<main class="relative z-10 max-w-4xl mx-auto px-6 py-24 flex flex-col gap-8">
 			<slot />

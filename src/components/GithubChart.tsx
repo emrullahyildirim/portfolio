@@ -1,8 +1,12 @@
 import { GitHubCalendar } from 'react-github-calendar';
 import { useState, useEffect } from 'react';
 
-const blueTheme = {
+const darkTheme = {
 	dark: ['#1a1a24', '#1e3a5f', '#2563eb', '#3b82f6', '#60a5fa'],
+};
+
+const lightTheme = {
+	light: ['#e4e4e7', '#bfdbfe', '#60a5fa', '#3b82f6', '#2563eb'],
 };
 
 function Skeleton() {
@@ -24,14 +28,27 @@ function Skeleton() {
 
 export default function GithubChart() {
 	const [loading, setLoading] = useState(true);
+	const [isLight, setIsLight] = useState(false);
 
 	useEffect(() => {
 		const timer = setTimeout(() => setLoading(false), 1500);
-		return () => clearTimeout(timer);
+
+		const checkTheme = () => {
+			setIsLight(document.documentElement.classList.contains('light'));
+		};
+
+		checkTheme();
+		const observer = new MutationObserver(checkTheme);
+		observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+		return () => {
+			clearTimeout(timer);
+			observer.disconnect();
+		};
 	}, []);
 
 	return (
-		<div className="relative min-h-[120px]">
+		<div className="relative min-h-30">
 			{loading && (
 				<div className="absolute inset-0 flex items-center">
 					<Skeleton />
@@ -40,8 +57,8 @@ export default function GithubChart() {
 			<div className={`transition-opacity duration-500 ${loading ? 'opacity-0' : 'opacity-100'}`}>
 				<GitHubCalendar
 					username="emrullahyildirim"
-					colorScheme="dark"
-					theme={blueTheme}
+					colorScheme={isLight ? 'light' : 'dark'}
+					theme={isLight ? lightTheme : darkTheme}
 					blockSize={11}
 					blockMargin={4}
 					fontSize={12}

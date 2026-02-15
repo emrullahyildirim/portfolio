@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, useSpring, useMotionValue, useTransform } from 'motion/react';
 
 export default function Spotlight() {
+	const [isLight, setIsLight] = useState(false);
 	const mouseX = useMotionValue(typeof window !== 'undefined' ? window.innerWidth / 2 : 0);
 	const mouseY = useMotionValue(typeof window !== 'undefined' ? window.innerHeight / 2 : 0);
 
@@ -18,21 +19,33 @@ export default function Spotlight() {
 			mouseX.set(e.clientX);
 			mouseY.set(e.clientY);
 		};
+
+		const checkTheme = () => {
+			setIsLight(document.documentElement.classList.contains('light'));
+		};
+
+		checkTheme();
+		const observer = new MutationObserver(checkTheme);
+		observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
 		window.addEventListener('mousemove', handleMouseMove);
-		return () => window.removeEventListener('mousemove', handleMouseMove);
+		return () => {
+			window.removeEventListener('mousemove', handleMouseMove);
+			observer.disconnect();
+		};
 	}, [mouseX, mouseY]);
 
 	return (
 		<div className="fixed inset-0 z-[-1] pointer-events-none">
 			<div
-				className="absolute inset-0 bg-grid-faded"
+				className={`absolute inset-0 ${isLight ? 'bg-grid-faded-light' : 'bg-grid-faded'}`}
 				style={{
 					maskImage: 'radial-gradient(ellipse 70% 70% at center, black 0%, rgba(0,0,0,0.4) 60%, transparent 100%)',
 					WebkitMaskImage: 'radial-gradient(ellipse 70% 70% at center, black 0%, rgba(0,0,0,0.4) 60%, transparent 100%)',
 				}}
 			/>
 			<motion.div
-				className="absolute inset-0 bg-grid-bright"
+				className={`absolute inset-0 ${isLight ? 'bg-grid-bright-light' : 'bg-grid-bright'}`}
 				style={{
 					maskImage: spotlightMask,
 					WebkitMaskImage: spotlightMask,
