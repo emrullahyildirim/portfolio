@@ -1,23 +1,42 @@
 ---
 import '../styles/global.css'
 import Spotlight from '../components/Spotlight';
-const { title = "Emur - Full-Stack Developer" } = Astro.props;
+import Contact from '../components/Contact.astro';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const {
+	title = "Emrullah Yıldırım - Full-Stack Developer",
+	description = "Full-stack developer focused on building clean, scalable solutions. Experienced in React, Next.js, Node.js, and more."
+} = Astro.props;
+
 ---
 
-<html>
+<html lang="en">
 	<head>
-		<title>{title}</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="author" content="Emrullah Yıldırım" />
+
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
-		
+		<link rel="sitemap" href="/sitemap-index.xml" />
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet" />
 	</head>
 
-	<body class="bg-dark-bg min-h-screen">
+	<body>
 		<Spotlight client:load />
-		<main class="relative z-10 min-h-screen">
+		<main class="relative z-10 max-w-4xl mx-auto px-6 py-24 flex flex-col gap-8">
 			<slot />
+			<Contact />
 		</main>
 	</body>
 </html>

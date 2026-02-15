@@ -1,0 +1,64 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const stack = {
+	frontend: [
+		{ name: 'React', icon: 'simple-icons:react', color: '#61DAFB' },
+		{ name: 'Next.js', icon: 'simple-icons:nextdotjs', color: '#ffffff' },
+		{ name: 'Astro', icon: 'simple-icons:astro', color: '#FF5D01' },
+		{ name: 'Tailwind', icon: 'simple-icons:tailwindcss', color: '#06B6D4' },
+	],
+	backend: [
+		{ name: 'Node.js', icon: 'simple-icons:nodedotjs', color: '#339933' },
+		{ name: 'Express', icon: 'simple-icons:express', color: '#ffffff' },
+		{ name: 'Nest.js', icon: 'simple-icons:nestjs', color: '#E0234E' },
+	],
+	database: [
+		{ name: 'PostgreSQL', icon: 'simple-icons:postgresql', color: '#4169E1' },
+		{ name: 'MongoDB', icon: 'simple-icons:mongodb', color: '#47A248' },
+		{ name: 'Prisma', icon: 'simple-icons:prisma', color: '#2D3748' },
+	],
+	devops: [
+		{ name: 'Docker', icon: 'simple-icons:docker', color: '#2496ED' },
+		{ name: 'Vercel', icon: 'simple-icons:vercel', color: '#ffffff' },
+	],
+	tools: [
+		{ name: 'Git', icon: 'simple-icons:git', color: '#F05032' },
+		{ name: 'Figma', icon: 'simple-icons:figma', color: '#F24E1E' },
+		{ name: 'Postman', icon: 'simple-icons:postman', color: '#FF6C37' },
+	],
+	languages: [
+		{ name: 'C', icon: 'simple-icons:c', color: '#5C6BC0' },
+		{ name: 'C++', icon: 'simple-icons:cplusplus', color: '#00599C' },
+	],
+};
+
+const categories = [
+	{ key: 'frontend', label: 'Frontend' },
+	{ key: 'backend', label: 'Backend' },
+	{ key: 'database', label: 'Database' },
+	{ key: 'devops', label: 'DevOps' },
+	{ key: 'tools', label: 'Tools' },
+	{ key: 'languages', label: 'Languages' },
+];
+---
+
+<section id="stack" class="space-y-6">
+	<h2 class="text-sm font-medium text-text-muted uppercase tracking-wider">Tech Stack</h2>
+
+	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+		{categories.map(({ key, label }) => (
+			<div class="p-4 bg-bg-secondary border border-border rounded-xl space-y-4">
+				<h3 class="text-xs font-medium text-text-muted uppercase tracking-wider">{label}</h3>
+				<div class="flex flex-wrap gap-2">
+					{stack[key as keyof typeof stack].map(tech => (
+						<div class="tech-item flex items-center gap-2 px-3 py-1.5 bg-bg-tertiary border border-border rounded-lg cursor-default transition-all duration-200 hover:border-border-hover hover:bg-bg-secondary hover:scale-105">
+							<Icon name={tech.icon} class="w-4 h-4" style={`color: ${tech.color}`} />
+							<span class="text-sm text-text-secondary">{tech.name}</span>
+						</div>
+					))}
+				</div>
+			</div>
+		))}
+	</div>
+</section>

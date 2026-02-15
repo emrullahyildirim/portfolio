@@ -10,13 +10,17 @@
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
+    "@iconify-json/lucide": "^1.2.90",
+    "@iconify-json/simple-icons": "^1.2.70",
     "@tailwindcss/vite": "^4.1.18",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "astro": "^5.17.1",
+    "astro-icon": "^1.1.5",
     "motion": "^12.34.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
+    "react-github-calendar": "^5.0.5",
     "tailwindcss": "^4.1.18"
   }
 }

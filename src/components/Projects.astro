@@ -1,0 +1,25 @@
+---
+import ProjectCard from './ProjectCard';
+
+const projects = [
+	{
+		title: 'Minishell',
+		description: 'A custom shell implementation in C, featuring command parsing, pipes, redirections, environment variables, and built-in commands. Built as part of the 42 curriculum.',
+		tech: ['C', 'Unix', 'Shell'],
+		github: 'https://github.com/emrullahyildirim/minishell',
+		images: [
+			'/projects/minishell/minishell-1.png',
+		],
+	},
+];
+---
+
+<section id="projects" class="space-y-6">
+	<h2 class="text-sm font-medium text-text-muted uppercase tracking-wider">Projects</h2>
+
+	<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+		{projects.map(project => (
+			<ProjectCard project={project} client:load />
+		))}
+	</div>
+</section>
