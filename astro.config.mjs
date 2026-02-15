@@ -5,6 +5,7 @@ import icon from 'astro-icon';
 
 export default defineConfig({
 	site: 'https://emrullahyildirim.github.io',
+	base: '/portfolio/',
 	vite: {
 		plugins: [tailwindcss()]
 	},
