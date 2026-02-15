@@ -1,0 +1,23 @@
+---
+import '../styles/global.css'
+import Spotlight from '../components/Spotlight';
+const { title = "Emur - Full-Stack Developer" } = Astro.props;
+---
+
+<html>
+	<head>
+		<title>{title}</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		
+	</head>
+
+	<body class="bg-dark-bg min-h-screen">
+		<Spotlight client:load />
+		<main class="relative z-10 min-h-screen">
+			<slot />
+		</main>
+	</body>
+</html>
