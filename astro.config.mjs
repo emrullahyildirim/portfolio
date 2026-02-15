@@ -4,8 +4,9 @@ import react from '@astrojs/react';
 import icon from 'astro-icon';
 
 export default defineConfig({
-  vite: {
-    plugins: [tailwindcss()]
-  },
-  integrations: [react(), icon()]
+	site: 'https://emrullahyildirim.github.io',
+	vite: {
+		plugins: [tailwindcss()]
+	},
+	integrations: [react(), icon()]
 });
